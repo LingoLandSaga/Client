@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTheme } from '../ThemeContext'
+import {Link} from 'react-router-dom'
 
 function Navbar(){
     const { isDarkMode, toggleTheme } = useTheme();
@@ -8,7 +9,9 @@ function Navbar(){
         <nav className={`py-2 fixed top-0 left-0  right-0 z-11 navbar ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-white'}`}>
             <div className="flex items-center justify-between px-4">
                 <div className="flex-3">
-                    <img src="https://image.pngaaa.com/797/5977797-middle.png" alt="Logo" className="h-8 w-auto rounded-full" />
+                    <Link to="/">
+                        <img src="https://image.pngaaa.com/797/5977797-middle.png" alt="Logo" className="h-8 w-auto rounded-full" />
+                    </Link>
                 </div>
                 <div className="flex-3">
                     <span className="text-lg  font-bold uppercase  font-serif">
