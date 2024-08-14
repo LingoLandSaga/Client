@@ -9,8 +9,9 @@ export default function JoinRoom() {
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [search, setSearch] = useState("");
-  async function fetchRooms() {
+  async function fetchRooms(e) {
     try {
+      e.preventDefault();
       setLoading(true);
       let options = "";
       if (search) {
@@ -47,6 +48,7 @@ export default function JoinRoom() {
           username,
         },
       });
+      localStorage.setItem("username", username);
       navigate(`/rooms/${id}`);
     } catch (error) {
       toast.error(err);
@@ -83,7 +85,7 @@ export default function JoinRoom() {
             <h2 className="card-title text-3xl text-[#0B3D2E]">Find a Room and Play!</h2>
             <form className="w-full flex">
               <input type="text" placeholder="Type here" value={search} onChange={(e) => setSearch(e.target.value)} className="input input-bordered flex-grow focus:outline-none bg-opacity-70" />
-              <button className="btn btn-primary border-none ml-2 bg-[#0B3D2E] hover:bg-primary">
+              <button className="btn btn-primary border-none ml-2 bg-[#0B3D2E] hover:bg-primary" onClick={(e) => fetchRooms(e)}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
@@ -93,12 +95,12 @@ export default function JoinRoom() {
               <div className="overflow-x-auto w-full h-96 overflow-y-auto">
                 {rooms.length > 0 ? (
                   <table className="table w-full">
-                    <thead className="sticky top-0 bg-base-300 bg-opacity-90">
+                    <thead className="sticky top-0 bg-primary text-white">
                       <tr>
-                        <th className="w-16 text-black">No</th>
-                        <th className="w-1/3 text-black">Name</th>
-                        <th className="w-1/4 text-black">Player Count</th>
-                        <th className="w-1/4 text-black">Status</th>
+                        <th className="w-16">No</th>
+                        <th className="w-1/3">Name</th>
+                        <th className="w-1/4">Player Count</th>
+                        <th className="w-1/4">Status</th>
                         <th className="w-1/6"></th>
                       </tr>
                     </thead>
@@ -124,7 +126,7 @@ export default function JoinRoom() {
                                 </form>
                               </div>
                             </dialog>
-                            <button onClick={(e) => openModalHandler()} className="btn btn-outline  btn-sm bg-[#0B3D2E] hover:bg-primary text-white">
+                            <button onClick={(e) => openModalHandler()} className="btn btn-neutral outline-none border-none  btn-sm bg-primary hover:bg-[#0C1E1A] text-white">
                               Join
                             </button>
                           </td>

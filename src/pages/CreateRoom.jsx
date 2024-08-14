@@ -23,6 +23,7 @@ export default function CreateRoom() {
           },
         })
       ).data.data;
+      localStorage.setItem("username", username);
       toast.success("Room created successfully!");
       navigate(`/rooms/${response.room.id}`);
     } catch (err) {
