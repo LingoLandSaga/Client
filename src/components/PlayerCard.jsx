@@ -12,8 +12,8 @@ export default function PlayerCard(isPlaying) {
           </div>
         </div>
         <div className="h-1/4"></div>
-        <div className="h-2/4 flex flex-1 items-center">
-          <input type="text" className="input input-bordered w-full" name="" id="" />
+        <div className="h-2/4 flex items-center">
+          <input type="text" className="input input-bordered w-full" />
         </div>
       </div>
     </>

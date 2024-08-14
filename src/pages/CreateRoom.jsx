@@ -9,8 +9,9 @@ export default function CreateRoom() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  async function createRoomHandler() {
+  async function createRoomHandler(e) {
     try {
+      e.preventDefault();
       setLoading(true);
       const response = (
         await instance({
@@ -21,10 +22,11 @@ export default function CreateRoom() {
             name,
           },
         })
-      ).data;
+      ).data.data;
       toast.success("Room created successfully!");
-      navigate(`rooms/${response.room.id}`);
+      navigate(`/rooms/${response.room.id}`);
     } catch (err) {
+      console.log(err);
       toast.error(err);
     } finally {
       setLoading(false);
