@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import MainLayout from "../pages/MainLayout";
 import JoinRoom from "../pages/JoinRoom";
 import CreateRoom from "../pages/CreateRoom";
+import Room from "../pages/Room";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/create-room",
         element: <CreateRoom />,
+      },
+      {
+        path: "/rooms/:roomId",
+        element: <Room />,
       },
     ],
   },
