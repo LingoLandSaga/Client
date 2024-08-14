@@ -95,10 +95,10 @@
   }
   
   .navbar {
-    background-color: rgba(241, 233, 233, 0.7);
-    color: #da3131;
+    background-color: rgba(126, 114, 48, 0.7);
+    color: #d1bcbc;
     backdrop-filter: blur(2px);
-    text-align: center;
+    text-shadow: #ffffff;     
   }
   
   .navbar a {

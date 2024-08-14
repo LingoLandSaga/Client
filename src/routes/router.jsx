@@ -3,6 +3,7 @@ import MainLayout from "../pages/MainLayout";
 import Home from "../pages/Home";
 import CreateRoom from "../pages/CreateRoom";
 import JoinRoom from "../pages/JoinRoom";
+import BattleFight from "../pages/BattleJoin";
 
 
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "join-room",
         element: <JoinRoom />,
+      },
+      {
+        path: "battle-fight",
+        element: <BattleFight />,
       },
     ],
   },

@@ -33,8 +33,8 @@ function HomePage() {
             </div>
           </div>
           <div className="w-full lg:w-1/2 lg:ml-4">
-            <h2 className={`text-3xl font-bold mb-10 text-center ${isDarkMode ? 'text-white' : 'text-black'}`}>RULES</h2>
-            <ul className={`space-y-3 text-lg text-center ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} backdrop-blur-md bg-opacity-30 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg`}>
+            <h2 className={`text-3xl font-bold mb-10 text-center   ${isDarkMode ? 'text-white' : 'text-black'}`}>RULES</h2>
+            <ul className={`space-y-3 text-lg text-center ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} backdrop-blur-md bg-opacity-5 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg`}>
               <li>1. Ketik kata yang muncul secepat mungkin</li>
               <li>2. Setiap kesalahan mengurangi poin</li>
               <li>3. Waktu terbatas untuk setiap ronde</li>
