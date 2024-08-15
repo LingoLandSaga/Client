@@ -137,7 +137,6 @@ export default function JoinRoom() {
         </div>
       </div>
 
-      {/* Modal moved outside of the map function */}
       <dialog id="join-modal" className="modal">
         <div className="modal-box bg-base-200 p-6 max-w-sm mx-auto">
           <h3 className="font-bold text-2xl mb-4 text-primary">Join Room</h3>

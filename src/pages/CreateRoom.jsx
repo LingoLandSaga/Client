@@ -24,7 +24,7 @@ export default function CreateRoom() {
       ).data.data;
       toast.success("Room created successfully!");
       localStorage.setItem('username', username);
-      navigate(`/rooms/${response.room.id}`);
+      navigate(`/rooms/${response.room.id}/wait`);
     } catch (err) {
       console.log(err);
       toast.error(err);
