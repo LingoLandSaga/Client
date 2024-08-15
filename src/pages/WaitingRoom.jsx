@@ -58,7 +58,13 @@ export default function WaitingRoom() {
 
   useEffect(() => {
     fetchPlayers();
-  }, []);
+    if (socket) {
+      console.log("masuk ngga");
+      socket.on("new-player-joined", () => {
+        fetchPlayers();
+      });
+    }
+  }, [socket]);
 
   const handleStartGame = (e) => {
     e.preventDefault();

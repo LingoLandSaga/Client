@@ -23,11 +23,10 @@ export default function CreateRoom() {
         })
       ).data.data;
       toast.success("Room created successfully!");
-      localStorage.setItem('username', username);
+      localStorage.setItem("username", username);
       navigate(`/rooms/${response.room.id}/wait`);
     } catch (err) {
-      console.log(err);
-      toast.error(err);
+      toast.error(err.response.data.message || "Failed to create room");
     } finally {
       setLoading(false);
     }

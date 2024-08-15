@@ -26,11 +26,9 @@ export default function JoinRoom() {
         })
       ).data;
 
-      console.log(response);
-
       setRooms(response);
     } catch (err) {
-      toast.error(err.message || "Failed to fetch rooms");
+      toast.error(err.response.data.message || "Failed to fetch rooms");
     } finally {
       setLoading(false);
     }
@@ -58,7 +56,7 @@ export default function JoinRoom() {
       localStorage.setItem("username", username);
       navigate(`/rooms/${selectedRoomId}/wait`);
     } catch (error) {
-      toast.error(error.message || "Failed to join room");
+      toast.error(error.response.data.message || "Failed to join room");
     }
   }
 
