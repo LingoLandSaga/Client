@@ -9,9 +9,11 @@ export default function JoinRoom() {
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [search, setSearch] = useState("");
+  const [selectedRoomId, setSelectedRoomId] = useState(null);
+
   async function fetchRooms(e) {
     try {
-      e.preventDefault();
+      e?.preventDefault();
       setLoading(true);
       let options = "";
       if (search) {
@@ -28,32 +30,38 @@ export default function JoinRoom() {
 
       setRooms(response);
     } catch (err) {
-      toast.error(err);
+      toast.error(err.message || "Failed to fetch rooms");
     } finally {
       setLoading(false);
     }
   }
 
-  function openModalHandler() {
+  function openModalHandler(roomId) {
+    setSelectedRoomId(roomId);
     document.getElementById("join-modal").showModal();
   }
 
-  async function joinRoomHandler(e, id) {
+  async function joinRoomHandler(e) {
     try {
       e.preventDefault();
+      if (!selectedRoomId) {
+        toast.error("No room selected");
+        return;
+      }
       await instance({
         method: "post",
-        url: `/rooms/${id}/join`,
+        url: `/rooms/${selectedRoomId}/join`,
         data: {
           username,
         },
       });
       localStorage.setItem("username", username);
-      navigate(`/rooms/${id}`);
+      navigate(`/rooms/${selectedRoomId}/wait`);
     } catch (error) {
-      toast.error(err);
+      toast.error(error.message || "Failed to join room");
     }
   }
+
   useEffect(() => {
     fetchRooms();
   }, []);
@@ -112,21 +120,7 @@ export default function JoinRoom() {
                           <td className="text-black">{room.playerCount}</td>
                           <td className="text-black">{room.isFinished ? "Finished" : "Unfinished"}</td>
                           <td>
-                            <dialog id="join-modal" className="modal">
-                              <div className="modal-box bg-base-200 p-6 max-w-sm mx-auto">
-                                <h3 className="font-bold text-2xl mb-4 text-primary">Join Room</h3>
-                                <p className="text-lg mb-4">Please input your name:</p>
-                                <form method="dialog" className="space-y-4">
-                                  <input className="w-full input input-bordered focus:border-primary focus:outline-none" type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Your name" />
-                                  <div className="modal-action">
-                                    <button onClick={(e) => joinRoomHandler(e, room.id)} className="btn bg-primary text-white hover:bg-[#0C1E1A] w-full">
-                                      Join Room
-                                    </button>
-                                  </div>
-                                </form>
-                              </div>
-                            </dialog>
-                            <button onClick={(e) => openModalHandler()} className="btn btn-neutral outline-none border-none  btn-sm bg-primary hover:bg-[#0C1E1A] text-white">
+                            <button onClick={() => openModalHandler(room.id)} className="btn btn-neutral outline-none border-none  btn-sm bg-primary hover:bg-[#0C1E1A] text-white">
                               Join
                             </button>
                           </td>
@@ -142,6 +136,22 @@ export default function JoinRoom() {
           </div>
         </div>
       </div>
+
+      {/* Modal moved outside of the map function */}
+      <dialog id="join-modal" className="modal">
+        <div className="modal-box bg-base-200 p-6 max-w-sm mx-auto">
+          <h3 className="font-bold text-2xl mb-4 text-primary">Join Room</h3>
+          <p className="text-lg mb-4">Please input your name:</p>
+          <form method="dialog" className="space-y-4">
+            <input className="w-full input input-bordered focus:border-primary focus:outline-none" type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Your name" />
+            <div className="modal-action">
+              <button onClick={joinRoomHandler} className="btn bg-primary text-white hover:bg-[#0C1E1A] w-full">
+                Join Room
+              </button>
+            </div>
+          </form>
+        </div>
+      </dialog>
     </div>
   );
 }

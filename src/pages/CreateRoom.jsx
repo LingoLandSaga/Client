@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateRoom() {
-  const [options, setOptions] = useState([]);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -25,7 +24,7 @@ export default function CreateRoom() {
       ).data.data;
       localStorage.setItem("username", username);
       toast.success("Room created successfully!");
-      navigate(`/rooms/${response.room.id}`);
+      navigate(`/rooms/${response.room.id}/wait`);
     } catch (err) {
       console.log(err);
       toast.error(err);
