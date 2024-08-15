@@ -4,6 +4,7 @@ import MainLayout from "../pages/MainLayout";
 import JoinRoom from "../pages/JoinRoom";
 import CreateRoom from "../pages/CreateRoom";
 import Room from "../pages/Room";
+import WaitingRoom from "../pages/WaitingRoom";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/rooms/:roomId",
         element: <Room />,
+      },
+      {
+        path: "/rooms/:roomId/wait",
+        element: <WaitingRoom />,
       },
     ],
   },

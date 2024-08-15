@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateRoom() {
-  const [options, setOptions] = useState([]);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -27,6 +26,7 @@ export default function CreateRoom() {
       localStorage.setItem('username', username);
       navigate(`/rooms/${response.room.id}`);
     } catch (err) {
+      console.log(err);
       toast.error(err);
     } finally {
       setLoading(false);
